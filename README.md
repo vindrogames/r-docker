@@ -61,3 +61,37 @@ Now you can run the following command to execute the script, and make changes in
 docker run -v $(pwd)/src:/src errevolume
 ```
 
+## Lets publish our own image on docker container registry
+
+First you need to create a PAT token, then execute  
+```
+export CR_PAT=veryprivatepattoken  
+```
+
+Then you can login to API github:  
+```
+echo $CR_PAT | docker login ghcr.io -u USER --password-stdin  
+```
+
+Then you TAG the already built image as follows:  
+```
+docker tag IMAGE_ID ghcr.io/WORKGROUP/IMAGE:latest  
+```
+
+then push it  
+```
+docker push ghcr.io/WORKGROUP/IMAGE:latest  
+```
+
+## Now you can execute it from anywhere as follows
+
+```
+docker pull ghcr.io/vindrogames/erreubuntu:latest  
+docker run ghcr.io/vindrogames/erreubuntu:latest  
+```
+
+or 
+```
+docker pull ghcr.io/vindrogames/errevolume:latest  
+docker run ghcr.io/vindrogames/errevolume:latest  
+```
